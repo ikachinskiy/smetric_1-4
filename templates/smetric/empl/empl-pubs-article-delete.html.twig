@@ -1,0 +1,145 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Статья на удаление</p>
+    <form method="post" action={{ path('sm_empl_pubs_article_delete', {artID:art.id}) }}>
+        <div class="form-group form-row">
+            <label for="articleAuthors" class="col-sm-2 col-form-label">Автор(ы):</label>
+            <div class="col-sm-10">
+                <textarea type="text" readonly name="articleAuthors" id="articleAuthors" class="form-control form-control-sm"
+                       data-toggle="tooltip" data-placement="top"
+                          title="Формат: Фамилия (полностью), инициалы (с точкой), ..." rows="1">{{ art.allauthors }}
+                </textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <div class="col-sm-6">Число авторов - сотрудников ФИЦ ИУ РАН:</div>
+            <div class="col-sm-6">
+                <input type="text" readonly class="form-control form-control-sm" placeholder="в том числе сотрудников ФИЦ ИУ РАН"
+                       data-toggle="tooltip" data-placement="top" title="Введите число авторов, являющихся сотрудниками ФИЦ ИУ РАН"
+                value={{ art.numauthfrc }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="articleTitle" class="col-sm-2 col-form-label">Название:</label>
+            <div class="col-sm-10">
+                <textarea id="articleTitle" readonly class="form-control form-control-sm" rows="4">{{ art.title }}
+                </textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="articleTitleMag" class="col-sm-2 col-form-label">Журнал:</label>
+            <div class="col-sm-10">
+                <textarea type="text" readonly id="articleTitleMag" class="form-control form-control-sm" rows="1">{{ art.magazine }}
+                </textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <div class="form-group col-sm-4">
+                <label for="articleYear">Год:</label>
+                <input type="text" id="articleYear" readonly class="form-control form-control-sm" value={{ art.year }}>
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="articleVolume">Том:</label>
+                <input id="articleVolume" type="text" readonly class="form-control form-control-sm" value={{ art.volume|e }}>
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="articleNumber">Номер:</label>
+                <input id="articleNumber" type="text" readonly class="form-control form-control-sm" value={{ art.number|e }}>
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="articlePageStart">Стр. начало:</label>
+                <input id="articlePageStart" type="text" readonly class="form-control form-control-sm" value={{ art.startpage }}>
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="articlePageEnd">Стр. конец:</label>
+                <input id="articlePageEnd" type="text" readonly class="form-control form-control-sm" value={{ art.endpage }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="articleParameters" class="col-sm-2">Категории:</label>
+            <div class="col-sm-10">
+                {% if art.catwoscore == true %}
+                    {% set woscore = "WoS(Core) " %}
+                {% else %}
+                    {% set woscore = "" %}
+                {% endif %}
+                {% if art.catwosrsci == true %}
+                    {% set wosrsci = "WoS(RSCI) " %}
+                {% else %}
+                    {% set wosrsci = "" %}
+                {% endif %}
+                {% if art.catscopus == true %}
+                    {% set scopus = "Scopus " %}
+                {% else %}
+                    {% set scopus = "" %}
+                {% endif %}
+                {% if art.catvak == true %}
+                    {% set vak = "Перечень ВАК " %}
+                {% else %}
+                    {% set vak = "" %}
+                {% endif %}
+                {% if art.catrinc == true %}
+                    {% set rinc = "Перечень РИНЦ " %}
+                {% else %}
+                    {% set rinc = "" %}
+                {% endif %}
+                {% if art.catothers == true %}
+                    {% set others = "Иное " %}
+                {% else %}
+                    {% set others = "" %}
+                {% endif %}
+                <textarea id="articleParameters" type="text" readonly class="form-control form-control-sm"
+                          rows="2">{{ [woscore, wosrsci, scopus, vak, rinc, others]|join }}</textarea>
+            </div>
+        </div>
+
+        <div class="form-group form-row">
+            <label for="" class="col-sm-4">Источник финансирования:</label>
+            <div class="col-sm-8">
+                {% for ftype in fintype %}
+                    {% if ftype.id == art.fintype %}
+                        <textarea id="finType" type="text" readonly class="form-control form-control-sm"
+                                  rows="1">{{ ftype.finsource }}</textarea>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="form-group form-row">
+            <div class="col-sm-6 text-right">
+                <button name="btnSubmit" value="DontDeleteArt" class="btn btn-primary btn-sm col-sm-9" type="submit">Не удалять и вернуться</button>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button name="btnSubmit" value="DeleteArt" class="btn btn-primary btn-sm col-sm-9" type="submit">Удалить и вернуться</button>
+            </div>
+        </div>
+        <input type="hidden" name="artID" value={{ art.id }}>
+        <input type="hidden" name="formName" value="EmpArtDelete">
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

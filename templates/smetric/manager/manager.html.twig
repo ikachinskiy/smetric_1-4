@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:managerMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Руководитель: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Подразделение: Институт / Отделение / Лаборатория</p>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Просмотр объекта интеллектуальной собственности</p>
+    <form method="post" action={{ path('sm_empl_patents') }}>
+        <div class="form-group form-row">
+            <label for="patAuthors" class="col-sm-2 col-form-label">Автор(ы):</label>
+            <div class="col-sm-10">
+                <textarea type="text" id="patAuthors" readonly class="form-control form-control-sm"
+                          rows="1">{{ oip.allauthors }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="patAuthorsFRC" class="col-sm-6 col-form-label">Число авторов - сотрудников ФИЦ ИУ РАН:</label>
+            <div class="col-sm-6">
+                <input type="text" id="patAuthorsFRC" readonly class="form-control form-control-sm"
+                       data-toggle="tooltip" data-placement="top" title="Введите число авторов, являющихся сотрудниками ФИЦ ИУ РАН"
+                        value={{ oip.numbauthfrc }}
+                >
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="patTitle" class="col-sm-2 col-form-label">Название:</label>
+            <div class="col-sm-10">
+                <textarea id="patTitle" readonly class="form-control form-control-sm text-left"
+                          rows="4">{{ oip.title }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="patType"class="col-sm-2 col-form-label">Вид ОИС:</label>
+            <div class="col-sm-5">
+                <textarea type="text" id="patType" readonly class="form-control form-control-sm"
+                          rows="2">{{ pdesc }}</textarea>
+            </div>
+            <label for="patNumber" class="col-sm-2 col-form-label text-right">№ рег.:</label>
+            <div class="col-sm-3">
+                <input id="patNumber" type="text" readonly class="form-control form-control-sm" value={{ oip.regnum }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="patPriorDate" class="col-sm-3 col-form-label text-right">Дата приоритета:</label>
+            <div class="col-sm-3">
+                <input id="patPriorDate" type="text" readonly class="form-control form-control-sm" value={{ oip.priordate|date("d-m-Y") }}>
+            </div>
+            <label for="patRegDate" class="col-sm-2 col-form-label text-right">Дата рег.:</label>
+            <div class="col-sm-4">
+                <input id="patRegDate" type="text" readonly class="form-control form-control-sm" value={{ oip.regdate|date("d-m-Y") }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="patNumPub" class="col-sm-3 col-form-label text-right">№ бюллетеня</label>
+            <div class="col-sm-3">
+                <input id="patNumPub" type="text" readonly class="form-control form-control-sm" value={{ oip.pubnum }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <div class="col-sm-6 text-right">
+                <button class="btn btn-primary btn-sm col-sm-9" type="submit">Вернуться</button>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button class="btn btn-primary btn-sm col-sm-9" type="submit">Напечатать в PDF</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

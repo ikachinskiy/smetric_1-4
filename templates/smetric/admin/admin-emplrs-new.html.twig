@@ -1,0 +1,217 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:adminMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">СисАдмин:</span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <div class="row">
+        <div class="col-sm-4">
+            <p class="lead"><span class="badge badge-secondary">Регистрация нового сотрудника</span></p>
+        </div>
+        {% if errMess == "" %}
+            <div class="col-sm-8">
+                {{ errMess }}
+            </div>
+        {% else %}
+            <div class="col-sm-8 alert alert-danger" role="alert">
+                {{ errMess }}
+            </div>
+        {% endif %}
+    </div>
+    <form method="post" action={{ path('sm_admin_emplrs_new') }}>
+        <div class="row">
+            <div class="col-3">
+                <div class="card">
+                    <img src="{{ asset('images/avatar-a.png') }}" class="img-rounded rounded float-center">
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="form-group row">
+                    <label for="empFamily" class="col-sm-3 col-form-label"
+                           data-toggle="tooltip" data-placement="top" title="Фамилия полностью: обязательно!">Фамилия *</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="empFamily" id="empFamily" class="form-control form-control-sm"
+                               placeholder="Фамилия полностью ОБЯЗАТЕЛЬНО!" data-toggle="tooltip" data-placement="top"
+                               title="Фамилия полностью: обязательно!" value={{ emp.family }}>
+                    </div>
+                    <label for="empName" class="col-sm-3 col-form-label"
+                           data-toggle="tooltip" data-placement="top" title="Имя полностью: обязательно!">Имя *</label>
+                    <div class="col-sm-9">
+                        <input type="text"name="empName" id="empName" class="form-control form-control-sm"
+                               placeholder="Имя полностью ОБЯЗАТЕЛЬНО!" data-toggle="tooltip" data-placement="top"
+                               title="Имя полностью: обязательно!" value={{ emp.name }}>
+                    </div>
+                    <label for="empSoname" class="col-sm-3 col-form-label"
+                           data-toggle="tooltip" data-placement="top" title="Отчество полностью: обязательно!">Отчество *</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="empSoname" id="empSoname" class="form-control form-control-sm"
+                               placeholder="Отчество полностью ОБЯЗАТЕЛЬНО!" data-toggle="tooltip" data-placement="top"
+                               title="Отчество полностью: обязательно!" value={{ emp.soname }}>
+                    </div>
+                    <label for="empEMail" class="col-sm-3 col-form-label">Email *</label>
+                    <div class="col-sm-9">
+                        <input type="email" name="empEMail" id="empEMail" class="form-control form-control-sm"
+                               placeholder="name@isa.ru" value={{ emp.email }}>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-sm-6">
+                <label for="empPass1">Пароль:</label>
+                <input type="text" name="empPass1" id="empPass1" class="form-control form-control-sm" value={{ emp.pass1 }}>
+            </div>
+            <div class="col-sm-6">
+                <label for="empPass2">и ещё раз:</label>
+                <input type="text" name="empPass2" id="empPass2" class="form-control form-control-sm" value={{ emp.pass2 }}>
+            </div>
+        </div>
+        <div class="form-row text-center">
+        ===========>
+        </div>
+
+        <div class="form-row">
+            <label for="empSciStatus"class="col-sm-2 col-form-label text-right">Степень</label>
+            <div class="col-sm-4">
+                <select name="empSciStatus" id="empSciStatus" class="form-control form-control-sm">
+                    {% for pos in scistatus %}
+                        <option value={{ pos.id }}>{{ pos.scistatus }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <label for="empSciPosition"class="col-sm-2 col-form-label text-right">Звание</label>
+            <div class="col-sm-3">
+                <select name="empSciPosition" id="empSciPosition" class="form-control form-control-sm">
+                    {% for pos in sciposition %}
+                        <option value={{ pos.id }}>{{ pos.sciposition }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="empWTel" class="col-form-label">Телефон раб.</label>
+                        <input type="tel" name="empWTel" id="empWTel" class="form-control form-control-sm col-sm-11" placeholder="+7(XXX)XXX-XX-XX">
+                    <label for="empMTel" class="col-form-label">Телефон моб.</label>
+                        <input type="tel" name="empMTel" id="empMTel" class="form-control form-control-sm col-sm-11" placeholder="+7(XXX)XXX-XX-XX">
+                    <label for="empMessenger" class="col-form-label">Адрес IMC</label>
+                        <input type="text" name="empMessenger" id="empMessenger" class="form-control form-control-sm col-sm-11" placeholder="адрес IMC (Skype, ICQ, WhatsApp,...">
+                    <label for="emplBDay" class="col-form-label">Дата рождения:</label>
+                        <input type="date" name="empBDay" id="emplBDay" class="form-control form-control-sm col-sm-11">
+                    <div class="form-check">
+                        <label for="emplJobStatus" class="form-check-label">
+                            <input type="radio" name="emplJobStatus" id="emplJobStatus" class="form-check-input form-control-sm" value="Staff" checked>
+                            Штатный сотрудник
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label for="emplJobStatus" class="form-check-label">
+                            <input type="radio" name="emplJobStatus" id="emplJobStatus" class="form-check-input form-control-sm" value="Moonlighter">
+                            Совместитель
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <p class="lead">Место работы</p>
+                    <label for="empWork-Inst">Институт</label>
+                    <select name="empWork-Inst" id="empWork-Inst" class="form-control form-control-sm">
+                        <option>ИПИ РАН</option>
+                        <option>ИСА РАН</option>
+                        <option>ВЦ РАН</option>
+                        <option>ИТЦЭ</option>
+                        <option>ИСИТМ</option>
+                        <option>ИОИ</option>
+                    </select>
+                    <label for="empWork-Div">Отделение</label>
+                    <select name="empWork-Div" id="empWork-Div" class="form-control form-control-sm">
+                        <option>Отделение А</option>
+                        <option>Отделение Б</option>
+                        <option>Отделение В</option>
+                    </select>
+                    <label for="empWork-Lab">Подразделение</label>
+                    <select name="empWork-Lab" id="empWork-Lab" class="form-control form-control-sm">
+                        <option>Лаборатория XXX</option>
+                        <option>Лаборатория YYY</option>
+                        <option>Лаборатория ZZZ</option>
+                    </select>
+                    <label for="empWork-Position">Должность</label>
+                    <select name="empWork-Position" id="empWork-Position" class="form-control form-control-sm">
+                        <option>Директор института</option>
+                        <option>Зав.лабораторией</option>
+                        <option>Ведущий инженер</option>
+                        <option>Старший инженер</option>
+                        <option>Простой инженер</option>
+                        <option>Техник</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="form-check col-3 text-center">
+                <input class="form-check-input" type="checkbox" id="grEmpl" name="grEmpl" checked>
+                <label class="form-check-label" for="grEmpl">
+                    Сотрудник
+                </label>
+            </div>
+            <div class="form-check col-3 text-center">
+                <input class="form-check-input" type="checkbox" id="grManager" name="grManager">
+                <label class="form-check-label" for="grManager">
+                    Руководитель
+                </label>
+            </div>
+            <div class="col-3">
+                <input class="form-check-input" type="checkbox" id="grAnalit" name="grAnalit">
+                <label class="form-check-label" for="grAnalit">
+                    Аналитик
+                </label>
+            </div>
+            <div class="col-3">
+                <input class="form-check-input" type="checkbox" id="grAdmin" name="grAdmin">
+                <label class="form-check-label" for="grAdmin">
+                    Сис.администратор
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-3">
+
+            </div>
+            <div class="col-3 text-center">
+                <button type="submit" class="btn btn-primary btn-sm" name="btnSubmit" value="SaveNewEmp">Сохранить</button>
+            </div>
+            <div class="col-3 text-center">
+                <button type="submit" class="btn btn-primary btn-sm" name="btnSubmit" value="DontSaveNewEmp">Не сохранять</button>
+            </div>
+        </div>
+        <input type="hidden" name="formName" value="AdminEmpNew">
+    </form>
+    {% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

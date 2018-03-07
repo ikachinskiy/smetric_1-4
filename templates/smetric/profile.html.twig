@@ -1,0 +1,192 @@
+{% extends "::base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Личная карточка/профиль</span></h2>
+    <form method="post" action={{ path('sm_profile') }}>
+        <div class="row">
+            <div class="col-3">
+                <div class="card">
+                    <img src="{{ asset('images/avatar-a.png') }}" class="img-rounded rounded float-center">
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="form-group row">
+                    <label for="empFamily" class="col-sm-3 col-form-label"
+                           data-toggle="tooltip" data-placement="top" title="Фамилия полностью: обязательно!">Фамилия *</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="empFamily" class="form-control form-control-sm" id="empFamily" value={{ user.empfamily }}
+                               data-toggle="tooltip" data-placement="top" title="Фамилия полностью: обязательно!">
+                    </div>
+                    <label for="empName" class="col-sm-3 col-form-label"
+                           data-toggle="tooltip" data-placement="top" title="Имя полностью: обязательно!">Имя *</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="empName" class="form-control form-control-sm" id="empName" value={{ user.empname }}
+                               data-toggle="tooltip" data-placement="top" title="Имя полностью: обязательно!">
+                    </div>
+                    <label for="empSoname" class="col-sm-3 col-form-label"
+                           data-toggle="tooltip" data-placement="top" title="Отчество полностью: обязательно!">Отчество *</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="empSoname" class="form-control form-control-sm" id="empSoname" value={{ user.empsoname }}
+                               data-toggle="tooltip" data-placement="top" title="Отчество полностью: обязательно!">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="empBDay" class="col-sm-4 col-form-label">
+                        Дата рождения:
+                    </label>
+                    <div class="col-sm-8">
+                        <input type="date"  name="empBDay" id="empBDay" class="form-control form-control-sm" value={{ user.empbday }}>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <label for="empSciStatus" class="col-sm-2 col-form-label text-right">Степень</label>
+            <div class="col-sm-3">
+                <select name="empSciStatus" class="form-control form-control-sm" id="empSciStatus">
+                    {% for st in StatusList %}
+                        <option value={{ st.id }}
+                            {% if st.id == user.empscistatus %}
+                                selected
+                                {% endif %}
+                        >{{ st.scistatus }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <label for="empSciPosition" class="col-sm-2 col-form-label text-right">Звание</label>
+            <div class="col-sm-4">
+                <select name="empSciPosition" class="form-control form-control-sm" id="empSciPosition">
+                    {% for pos in PositionList %}
+                        <option value={{ pos.id }}
+                            {% if pos.id == user.empsciposition %}
+                                selected
+                                {% endif %}
+                        >{{ pos.sciposition }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="empEMail">Email</label>
+                    <input type="email" name="empEMail" id="empEMail" class="form-control form-control-sm col-sm-11" placeholder="name@isa.ru" value={{ user.empmainemail }}>
+                    <label for="empWTel">Телефон раб.</label>
+                    <input type="tel" name="empWTel" id="empWTel" class="form-control form-control-sm col-sm-11" placeholder="+7(XXX)XXX-XX-XX" value={{ user.empwtel }}>
+                    <label for="empMTel">Телефон моб.</label>
+                    <input type="tel" name="empMTel" id="empMTel" class="form-control form-control-sm col-sm-11" placeholder="+7(XXX)XXX-XX-XX" value={{ user.empmtel }}>
+                    <label for="empSkype">Адрес IMS</label>
+                    <input type="text" name="empMessenger" id="empMessenger" class="form-control form-control-sm col-sm-11" placeholder="адрес IMC (Skype, ICQ, WhatsApp...)" value={{ user.empmessenger }}>
+                    <div class="form-check">
+                        <p>&nbsp;</p>
+                    </div>
+                    {% if user.empjobstatus %}
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" name="JobStatus" id="Shtat" class="form-check-input form-control-sm"
+                                       value="Shtat" checked>
+                                В штате
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" name="JobStatus" id="Sovmestitel" class="form-check-input form-control-sm"
+                                       value="Sovmestitel">
+                                Совместитель
+                            </label>
+                        </div>
+                    {% else %}
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" name="JobStatus" id="Shtat" class="form-check-input form-control-sm" value="Shtat">
+                                В штате
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" name="JobStatus" id="Sovmestitel" class="form-check-input form-control-sm" value="Sovmestitel" checked>
+                                Совместитель
+                            </label>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <p class="lead">Место работы *</p>
+                    <label for="empWork-Inst">Институт</label>
+                    <select name="empWork-Inst" id="empWork-Inst" class="form-control form-control-sm">
+                        <option>ИПИ РАН</option>
+                        <option>ИСА РАН</option>
+                        <option>ВЦ РАН</option>
+                        <option>ИТЦЭ</option>
+                        <option>ИСИТМ</option>
+                        <option>ИОИ</option>
+                    </select>
+                    <label for="empWork-Div">Отделение</label>
+                    <select name="empWork-Div" id="empWork-Div" class="form-control form-control-sm">
+                        <option>Отделение А</option>
+                        <option>Отделение Б</option>
+                        <option>Отделение В</option>
+                    </select>
+                    <label for="empWork-Lab">Подразделение</label>
+                    <select name="empWork-Lab" id="empWork-Lab" class="form-control form-control-sm">
+                        <option>Лаборатория XXX</option>
+                        <option>Лаборатория YYY</option>
+                        <option>Лаборатория ZZZ</option>
+                    </select>
+                    <label for="empWork-Position">Должность</label>
+                    <select name="empWork-Position" id="empWork-Position" class="form-control form-control-sm">
+                        <option>Директор института</option>
+                        <option>Зав.лабораторией</option>
+                        <option>Ведущий инженер</option>
+                        <option>Старший инженер</option>
+                        <option>Простой инженер</option>
+                        <option>Техник</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <div class="col-3 text-center">
+                    <a class="btn btn-info btn-sm" href={{ path('sm_login') }}>Параметры пользователя</a>
+                </div>
+            </div>
+            <div class="col-3">
+
+            </div>
+            <div class="col-3 text-center">
+                <button type="submit" name="btnSubmit" value="SaveProfile" class="btn btn-primary btn-sm">Сохранить
+                </button>
+            </div>
+            <div class="col-3 text-center">
+                <button type="submit" name="btnSubmit" value="DontSaveProfile" class="btn btn-primary btn-sm">Не сохранять
+                </button>
+            </div>
+        </div>
+        <input type="hidden" name="formName" value="EmpProfile">
+    </form>
+    {% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Публикации</p>
+    <p>Регистрация публикаций сотрудника, просмотр их списком и в деталях, редактирование и удаление</p>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

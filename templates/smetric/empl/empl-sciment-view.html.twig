@@ -1,0 +1,135 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Подготовка научных кадров: просмотр активности</p>
+    <form method="post" action={{ path('sm_empl_sciment') }}>
+
+        <div class="form-group form-row">
+            <div class="col-sm-4 text-left">
+                <p class="lead">Вид деятельности:</p>
+            </div>
+            <div class="col-sm-5 text-right">
+                <label class="col-form-label">Дата регистрации:</label>
+            </div>
+            <div class="col-sm-3">
+                <p class="form-control">{{ sci.regdate }}</p>
+            </div>
+        </div>
+
+        <fieldset class="form-group">
+            <div class="row">
+                <div class="col-form-legend col-sm-1"></div>
+                <div class="col-sm-11">
+                    {% for type in scitypes %}
+                        {% if sci.scitype == type.id %}
+                            <h2>{{ type.description }}</h2>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="form-group form-row">
+            <label class="col-sm-3 col-form-label">
+                Ф.И.О. диссертанта:
+            </label>
+            <p class="col-sm-5 form-control form-control-sm">{{ sci.disauthor }}</p>
+            <label for="Status" class="col-sm-2 col-form-label text-right">
+                Уч.степень:
+            </label>
+            <p class="col-sm-2 form-control form-control-sm">
+                {% for st in scistatus %}
+                    {% if sci.disstatus == st.id %}
+                        {{ st.scistatus }}
+                    {% endif %}
+                {% endfor %}
+            </p>
+        </div>
+
+        <div class="form-group form-row">
+            <label for="disTitle" class="col-sm-3 col-form-label">
+                Тема диссертации:
+            </label>
+            <p class="col-sm-9 form-control form-control-sm">{{ sci.distitle }}</p>
+        </div>
+
+        <div class="form-group form-row">
+            <div class="col-sm-4">
+                <p>Диссертационный совет: </p>
+            </div>
+            <div class="col-sm-8">
+                <p class="form-control form-control-sm">
+                    {% for dc in discouncil %}
+                        {% if sci.discouncil == dc.id %}
+                            {{ dc.number }}, председатель {{ dc.chairman }}
+                        {% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+
+            <div class="col-sm-4">
+                <p>Специальность: </p>
+            </div>
+            <div class="col-sm-8">
+                <p class=" form-control form-control-sm">
+                    {% for sp in speciality %}
+                        {% if sci.disspeciality == sp.id %}
+                            {% if sp.number == null %}
+                                Не определёна
+                            {% else %}
+                                {{ sp.number }}, {{ sp.descr }}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+
+        </div>
+
+        <div class="form-group form-row">
+            <label class="col-sm-3 col-form-label text-right">
+                Дата защиты:
+            </label>
+            <p class="form-control form-control-sm col-sm-3">{{ sci.disdefdate|date('d-m-Y') }}</p>
+
+            <label class="col-sm-3 col-form-label text-right">
+                Регистрация ВАК:
+            </label>
+            <p class="form-control form-control-sm col-sm-3">{{ sci.disvakdate|date('d-m-Y') }}</p>
+        </div>
+
+        <div class="form-group form-row">
+            <div class="col-sm-6 text-right">
+            </div>
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="ViewSciList" class="btn btn-primary col-sm-9">Вернуться к списку</button>
+            </div>
+        </div>
+        <input type="hidden" name="formName" value="SciView">
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Это ваше основное рабочее место. Здесь вы можете управлять всеми вашими
+    событиями и активами, имеющими отношение к рассчёту вашего рейтинга</p>
+    <p>Основное меню - слева. Оно позволяет получить доступ к разделам вашего рабочего
+    места, в который вы можете создавать, редактировать и просматривать различные типы
+    активов и событий.</p>
+    <p>Также с помощью раздела "Отчёты" вы можете подготовить финальные сводные отчёты
+        в соответствии с утверждёнными формами, а в разделе "Рейтинг" увидеть текущее
+    состояние вашего рейтинга.</p>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

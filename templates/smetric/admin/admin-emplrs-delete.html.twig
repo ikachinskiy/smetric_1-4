@@ -1,0 +1,148 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:adminMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">СисАдмин:</span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+<div class="row">
+    <div class="col-sm-4">
+        <p class="lead"><span class="badge badge-secondary">Удаление сотрудника</span></p>
+    </div>
+    {% if errMess == "" %}
+        <div class="col-sm-8">
+            {{ errMess }}
+        </div>
+    {% else %}
+        <div class="col-sm-8 alert alert-danger" role="alert">
+            {{ errMess }}
+        </div>
+    {% endif %}
+</div>
+    <form method="post" action={{ path('sm_admin_emplrs_delete', {eID:emp.id}) }}>
+        <div class="row">
+            <div class="col-3">
+                <div class="card">
+                    <img src="{{ asset('images/avatar-a.png') }}" class="img-rounded rounded float-center">
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="form-group row">
+                    <label for="empFamily" class="col-sm-3 col-form-label"
+                           data-toggle="tooltip" data-placement="top" title="Фамилия полностью: обязательно!">Фамилия</label>
+                    <div class="col-sm-9">
+                        <input type="text" readonly class="form-control form-control-sm" id="empFamily" value={{ emp.empfamily }}
+                               data-toggle="tooltip" data-placement="top" title="Фамилия полностью: обязательно!">
+                    </div>
+                    <label for="empName" class="col-sm-3 col-form-label"
+                           data-toggle="tooltip" data-placement="top" title="Имя полностью: обязательно!">Имя</label>
+                    <div class="col-sm-9">
+                        <input type="text" readonly class="form-control form-control-sm" id="empName" value={{ emp.empname }}
+                               data-toggle="tooltip" data-placement="top" title="Имя полностью: обязательно!">
+                    </div>
+                    <label for="empSoname" class="col-sm-3 col-form-label"
+                           data-toggle="tooltip" data-placement="top" title="Отчество полностью: обязательно!">Отчество</label>
+                    <div class="col-sm-9">
+                        <input type="text" readonly class="form-control form-control-sm" id="empSoname" value={{ emp.empsoname }}
+                               data-toggle="tooltip" data-placement="top" title="Отчество полностью: обязательно!">
+                    </div>
+                    <label for="empEMail" class="col-sm-3 col-form-label">Email *</label>
+                    <div class="col-sm-9">
+                        <input type="email" readonly class="form-control form-control-sm" id="empEMail" placeholder={{ emp.empmainemail }}>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            &nbsp;
+        </div>
+        <div class="form-row">
+            <label for="empSciStatus" class="col-sm-2 col-form-label">Степень</label>
+            <div class="col-sm-3">
+                <input type="text" readonly class="form-control form-control-sm" id="empSciStatus" value={{ scistatus }}>
+            </div>
+            <label for="empSciPosition" class="col-sm-2 col-form-label">Звание</label>
+            <div class="col-sm-4">
+                <input type="text" readonly class="form-control form-control-sm" id="empSciPosition" value={{ sciposition }}>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="empWTel" class="col-form-label">Телефон раб.</label>
+                    <input type="tel" readonly class="form-control form-control-sm" id="empWTel" placeholder={{ emp.empwtel }}>
+                    <label for="empMTel" class="col-form-label">Телефон моб.</label>
+                    <input type="tel" readonly class="form-control form-control-sm" id="empMTel" placeholder={{ emp.empmtel }}>
+                    <label for="empSkype" class="col-form-label">Skype</label>
+                    <input type="text" readonly class="form-control form-control-sm" id="empSkype" placeholder={{ emp.empmessenger }}>
+                    <label for="emplBDay" class="col-form-label">Дата рождения:</label>
+                    <input type="text"  readonly id="emplBDay" class="form-control form-control-sm" placeholder={{ emp.empbday }}>
+                    <div class="form-check">
+                        <label for="empJobState">Договор:
+                        </label>
+                        {% if emp.empjobstatus %}
+                            <input type="text" readonly class="form-control form-control-sm" id="empJobState" placeholder="в штате">
+                        {% else %}
+                            <input type="text" readonly class="form-control form-control-sm" id="empJobState" placeholder="совместитель">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <p class="lead">Место работы</p>
+                    <label for="empWork-Inst">Институт</label>
+                    <input type="text" readonly class="form-control form-control-sm" id="empWork-Inst" placeholder="ИСА РАН">
+                    <label for="empWork-Div">Отделение</label>
+                    <input type="text" readonly class="form-control form-control-sm" id="empWork-Div" placeholder="Отделение А">
+                    <label for="empWork-Lab">Подразделение</label>
+                    <input type="text" readonly class="form-control form-control-sm" id="empWork-Lab" placeholder="Лаборатория 1">
+                    <label for="empWork-Position">Должность</label>
+                    <input type="text" readonly class="form-control form-control-sm" id="empWork-Position" placeholder="зав.лабораторией">
+                    <p>Состоит в группах:</p>
+                    {% if emp.role_empl == 1 %}Сотрудник&nbsp{% endif %}
+                    {% if emp.role_manager == 1  %}Руководитель&nbsp{% endif %}
+                    {% if emp.role_analit == 1  %}Аналитик&nbsp{% endif %}
+                    {% if emp.role_admin == 1  %}Сис.админ{% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-3">
+
+            </div>
+            <div class="col-3 text-center">
+                <button type="submit"  name="btnSubmit" value="DontDeleteEmp" class="btn btn-primary btn-sm">Вернуться без удаления</button>
+            </div>
+            <div class="col-3 text-center">
+                <button type="submit"  name="btnSubmit" value="DeleteEmp" class="btn btn-primary btn-sm">Удалить и вернуться</button>
+            </div>
+            <input type="hidden" name="eID" value={{ emp.id }}>
+            <input type="hidden" name="formName" value="AdminEmplDelete">
+        </div>
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

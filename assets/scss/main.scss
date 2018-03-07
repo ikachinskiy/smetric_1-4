@@ -1,0 +1,110 @@
+html {
+  min-height: 100%;
+  display: flex;
+}
+body {
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+}
+
+.container {
+  min-height: inherit;
+  flex-grow: 1;
+}
+
+header.navbar {
+  background-color: #bababa;
+  height: 80px;
+  padding: 0 20px 0px 20px;
+  .nav-tabs {
+    .nav-item {
+      height: 40px;
+      .nav-link {
+        color: #fbfbfb;
+        height: 40px;
+        padding: 0;
+      }
+      .nav-link.active {
+        color: #686868;
+        background-color: #fbfbfb;
+      }
+      .nav-link:hover {
+        color: #f5ce0d;
+      }
+    }
+  }
+  .top-nav {
+    height: 80px;
+  }
+  ul.top-menu {
+    padding-top: 40px;
+  }
+  .logo {
+    a {
+      color: #e6e6e6;
+      text-decoration: none;
+    }
+    a:hover {
+      color: wheat;
+    }
+    h2 {
+      padding-top: 15px;
+      text-shadow: 3px 3px 2px #808080;
+    }
+  }
+  .regmenu {
+    ul {
+      padding-top: 15px;
+    }
+    a {
+      padding: 0 10px 0 10px;
+      font-size: 0.8rem;
+      color: #ffffff;
+    }
+    a:hover {
+      color: #f5ce0d;
+    }
+  }
+  .avatar {
+    padding-top: 10px;
+  }
+}
+
+.mcontent {
+  flex-grow: 1;
+  background-color: #fbfbfb;
+  .row {
+    padding: 0;
+  }
+  .lmenu {
+    background-color: rgb(230, 230, 230);
+    padding: 15px;
+    .nav-item {
+      font-size: 16px;
+      ul li {
+        padding-left: 16px;
+        font-size: 14px;
+      }
+    }
+    .nav-link {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      padding: 4px;
+    }
+    .nav-link:hover {
+      color: #fff7ae;
+      background-color: #a4b0b6;
+    }
+  }
+  .rcontent {
+    padding: 15px;
+    overflow-y: auto;
+  }
+}
+
+footer {
+  background-color: #6a6d70;
+  color: white;
+}

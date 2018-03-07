@@ -1,0 +1,64 @@
+{% extends "::base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+{% endblock %}
+
+{% block MainContent %}
+    <h1>Регистрация</h1>
+    <p>Все поля являются обязательными!</p>
+    <form method="post" action="{{ path('sm_reg') }}">
+        <div class="form-group">
+            <label for="empFamily">Фамилия</label>
+            <input type="text" name="empFamily" class="form-control" id="empFamily" placeholder="Фамилия полностью">
+        </div>
+        <div class="form-group">
+            <label for="empName">Имя</label>
+            <input type="text" name="empName" class="form-control" id="empName" placeholder="Имя полностью">
+        </div>
+        <div class="form-group">
+            <label for="empSoname">Отчество</label>
+            <input type="text" name="empSoname" class="form-control" id="empSoname" placeholder="Отчество полностью">
+        </div>
+        <div class="form-group">
+            <label for="empMainEMail">E-Mail</label>
+            <input type="email" name="empMainEMail" class="form-control" id="empMainEMail" placeholder="Ваш e-mail - будет использоваться в качестве логина">
+        </div>
+        <div class="form-group">
+            <label for="empPass1">Пароль</label>
+            <input type="password" name="empPass1" class="form-control" id="empPass1" placeholder="Пароль">
+        </div>
+        <div class="form-group">
+            <label for="empPass2">ещё раз</label>
+            <input type="password" name="empPass2" class="form-control" id="empPass2" placeholder="Пароль">
+        </div>
+        <div class="form-row">
+            <div class="col-sm-8 text-right">
+                <button type="submit" name="btnSubmit" value="DontRegNewEmp" class="btn btn-primary btn-sm">Отказаться от регистрации</button>
+            </div>
+            <div class="col-sm-4 text-right">
+                <button type="submit" name="btnSubmit" value="RegNewEmp" class="btn btn-primary btn-sm">Зарегистрироваться</button>
+            </div>
+        </div>
+        <input type="hidden" name="formName" value="RegNewEmp">
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

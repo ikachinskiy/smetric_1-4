@@ -1,0 +1,92 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Просмотр учебника, пособия или монографии</p>
+    <form method="post" action={{ path('sm_empl_pubs_mono') }}>
+        <div class="form-group form-row">
+            <label for="monoAuthors" class="col-sm-2 col-form-label">Авторы:</label>
+            <div class="col-sm-10">
+                <textarea type="text" readonly id="monoAuthors"
+                          class="form-control form-control-sm" rows="1">{{ mono.allauthors }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="monoAuthorsFRC" class="col-sm-6 col-form-label">Число авторов - сотрудников ФИЦ ИУ РАН:</label>
+            <div class="col-sm-6">
+                <input type="text" readonly id="monoAuthorsFRC" class="form-control form-control-sm"
+                       data-toggle="tooltip" data-placement="top" title="Введите число авторов, являющихся сотрудниками ФИЦ ИУ РАН"
+                       value={{ mono.numbauthfrc }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="monoTitle" class="col-sm-2 col-form-label">Название:</label>
+            <div class="col-sm-10">
+                <textarea id="monoTitle" readonly class="form-control form-control-sm text-left" rows="4">{{ mono.title }}
+                </textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="monoPlacePub" class="col-sm-1 col-form-label">Место:</label>
+            <div class="col-sm-3">
+                <textarea type="text" readonly id="monoPlacePub" rows="1"
+                          class="form-control form-control-sm">{{ mono.pubplace }}</textarea>
+            </div>
+            <label for="monoPub" class="col-sm-2 col-form-label">Издательство:</label>
+            <div class="col-sm-6">
+                <textarea type="text" readonly id="monoPub" rows="1"
+                          class="form-control form-control-sm">{{ mono.publisher }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="monoYear" class="col-sm-1 col-form-label text-right">Год:</label>
+            <div class="col-sm-1">
+                <input type="text" readonly id="monoYear" class="form-control form-control-sm" value={{ mono.pubyear }}>
+            </div>
+            <label for="monoPages" class="col-sm-1 col-form-label text-right">Стр:</label>
+            <div class="col-sm-1">
+                <input type="text" readonly id="monoPages" class="form-control form-control-sm" value={{ mono.pages }}>
+            </div>
+            <label for="monoISBN" class="col-sm-1 col-form-label text-right">ISBN:</label>
+            <div class="col-sm-4">
+                <input type="text" readonly id="monoISBN" class="form-control form-control-sm" value={{ mono.isbn }}>
+            </div>
+            <label for="monoCirculation" class="col-sm-1 col-form-label text-right">Тираж:</label>
+            <div class="col-sm-2">
+                <input type="text" readonly id="monoCirculation" class="form-control form-control-sm" value={{ mono.circulation }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="ReturnToList" class="btn btn-primary btn-sm col-sm-9">Вернуться</button>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="PrintPDF" class="btn btn-primary btn-sm col-sm-9">Распечатать в PDF</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

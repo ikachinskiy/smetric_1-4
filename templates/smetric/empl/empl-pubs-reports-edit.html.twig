@@ -1,0 +1,184 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Редактирование доклада</p>
+    <form method="post" action="{{ path('sm_empl_pubs_reports_edit', {repID:rep.id}) }}">
+        <div class="form-group form-row">
+            <label for="reportAuthors" class="col-sm-2 form-control-label">Авторы:</label>
+            <div class="col-sm-10">
+                <textarea name="reportAuthors" id="reportAuthors" type="text" class="form-control form-control-sm">{{ rep.allauthors }}
+                </textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="reportAuthFRC" class="col-sm-6 form-control-label">Число авторов - сотрудников ФИЦ ИУ РАН:</label>
+            <div class="col-sm-6">
+                <input name="reportAuthFRC" id="reportAuthFRC" type="text" class="form-control form-control-sm"
+                       data-toggle="tooltip" data-placement="top" title="Введите число авторов, являющихся сотрудниками ФИЦ ИУ РАН"
+                       value={{ rep.numauthfrc }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="reportTitle" class="col-sm-2 form-control-label">Название:</label>
+            <div class="col-sm-8 form-control-sm">
+                <textarea name="reportTitle" id="reportTitle" class="form-control form-control-sm text-left" rows="2">{{ rep.title }}
+                </textarea>
+            </div>
+            <div class="col-sm-2 text-right">
+                {% if rep.reptype == 1 %}
+                    <div class="form-check">
+                        <label for="reportFull" class="form-check-label">
+                            <input type="radio" name="reportType" id="reportFull" value="reportFull" class="form-check-input" checked>
+                            Доклад
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label for="reportShort" class="form-check-label">
+                            <input type="radio" name="reportType" id="reportShort" value="reportShort" class="form-check-input">
+                            Тезисы
+                        </label>
+                    </div>
+                {% elseif rep.reptype == 0 %}
+                    <div class="form-check">
+                        <label for="reportFull" class="form-check-label">
+                            <input type="radio" name="reportType" id="reportFull" value="reportFull" class="form-check-input">
+                            Доклад
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label for="reportShort" class="form-check-label">
+                            <input type="radio" name="reportType" id="reportShort" value="reportShort" class="form-check-input" checked>
+                            Тезисы
+                        </label>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="reportEvent" class="col-sm-2 form-control-label">Мероприятие:</label>
+            <div class="col-sm-10 form-control-sm">
+                <textarea name="reportEvent" id="reportEvent" type="text"
+                          class="form-control form-control-sm" rows="1">{{ rep.eventname }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="reportEventPlace" class="col-sm-1 form-control-label">Место:</label>
+            <textarea type="text" name="reportEventPlace" id="reportEventPlace"
+                      class="form-control form-control-sm col-sm-3" rows="1">{{ rep.eventplace }}</textarea>
+            <label for="reportEventStartDate" class="col-sm-1 text-right form-control-label">Дата:</label>
+            <input type="date" name="reportEventStartDate" id="reportEventStartDate"
+                   class="form-control form-control-sm col-sm-3" value={{ rep.eventstartdate }}>
+            <label for="reportEventEndDate" class="col-sm-1 form-control-label text-center">/</label>
+            <input type="date" name="reportEventEndDate" id="reportEventEndDate"
+                   class="form-control form-control-sm col-sm-3" value={{ rep.eventenddate }}>
+        </div>
+        <div class="form-group form-row">
+            <label for="reportMagTitle" class="col-sm-2 form-control-label">Сборник:</label>
+            <div class="col-sm-10 form-control-sm">
+                <textarea name="reportMagTitle" id="reportMagTitle"
+                          class="form-control form-control-sm" rows="1">{{ rep.magazine }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="reportPub" class="col-sm-2 form-control-label">Издательство:</label>
+            <div class="col-sm-10 form-control-sm">
+                <textarea type="text" name="reportPub" id="reportPub"
+                          class="form-control form-control-sm" rows="1">{{ rep.publisher }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="reportPubPlace" class="col-sm-1 form-control-label">Место:</label>
+            <div class="col-sm-2 form-control-sm">
+                <textarea type="text" name="reportPubPlace" id="reportPubPlace"
+                          class="form-control form-control-sm" rows="1">{{ rep.pubplace }}</textarea>
+            </div>
+            <label for="reportPubYear" class="col-sm-1 form-control-label text-right">Год:</label>
+            <div class="col-sm-2 form-control-sm">
+                <input type="text" name="reportPubYear" id="reportPubYear"
+                       class="form-control form-control-sm" value={{ rep.pubyear }}>
+            </div>
+            <label for="reportPubPageStart" class="col-sm-1 form-control-label text-right">Стр:</label>
+            <div class="col-sm-2 form-control-sm">
+                <input type="text" name="reportPubPageStart" id="reportPubPageStart"
+                       class="form-control form-control-sm" value={{ rep.startpage }}>
+            </div>
+            <label for="reportPubPageEnd" class="col-sm-1 form-control-label text-center">/</label>
+            <div class="col-sm-2 form-control-sm">
+                <input type="text" name="reportPubPageEnd" id="reportPubPageEnd"
+                       class="form-control form-control-sm" value={{ rep.endpage }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label class="col-sm-2">Категории:</label>
+            <label class="col-sm-2 form-check-label">
+                <input type="checkbox" name="WoS" class="form-check-input"
+                {% if rep.catwos %}
+                    checked
+                {% endif %}>
+                WoS
+            </label>
+            <label class="col-sm-2 form-check-label">
+                <input type="checkbox" name="Scopus" class="form-check-input"
+                {% if rep.catscopus %}
+                checked
+                {% endif %}>
+                Scopus
+            </label>
+            <label class="col-sm-2 form-check-label">
+                <input type="checkbox" name="ISSN" class="form-check-input"
+                {% if rep.catissn %}
+                checked
+                {% endif %}>
+                ISSN
+            </label>
+            <label class="col-sm-2 form-check-label">
+                <input type="checkbox" name="ISBN" class="form-check-input"
+                {% if rep.catisbn %}
+                checked
+                {% endif %}>
+                ISBN
+            </label>
+            <label class="col-sm-2form-check-label">
+                <input type="checkbox" name="Others" class="form-check-input"
+                {% if rep.catothers %}
+                checked
+                {% endif %}>
+                Иное
+            </label>
+        </div>
+        <div class="form-group form-row">
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="SaveEditRep" class="btn btn-primary btn-sm col-sm-9">Сохранить и вернуться</button>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button  type="submit" name="btnSubmit" value="DontSaveEditRep" class="btn btn-primary btn-sm col-sm-9">Вернуться без сохранения</button>
+            </div>
+        </div>
+        <input type="hidden" name="formName" value="EmpRepEdit">
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

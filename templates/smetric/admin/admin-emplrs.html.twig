@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:adminMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">СисАдмин:</span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <form>
+        <div class="form-row">
+            <div class="col-sm-4">
+                <p class="lead">Сотрудники списком:</p>
+            </div>
+            <div class="col-sm-8 text-right">
+                <a class="btn btn-primary btn-sm" href={{ path('sm_admin_emplrs_new') }}>Создать нового...</a>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-sm">
+                <thead class="thead-inverse">
+                <tr>
+                    <th>PersonalID</th>
+                    <th>Фамилия</th>
+                    <th>Имя</th>
+                    <th>Отчество</th>
+                    <th>e-Mail</th>
+                    <th class="text-center">Команды</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for emp in empls %}
+                    <tr>
+                        <td>
+                            {{ emp.personalid|e }}
+                        </td>
+                        <td>
+                            {{ emp.empfamily|e }}
+                        </td>
+                        <td>
+                            {{ emp.empname|e }}
+                        </td>
+                        <td>
+                            {{ emp.empsoname|e }}
+                        </td>
+                        <td>
+                            {{ emp.empmainemail|e }}
+                        </td>
+                        <td class="text-center">
+                            <a href={{ path('sm_admin_emplrs_view', {eID:emp.id}) }}>
+                                <i class="fa fa-search" data-toggle="tooltip" data-placement="top" title="Просмотр">&nbsp;&nbsp;</i>
+                            </a>
+                            <a href={{ path('sm_admin_emplrs_edit', {eID:emp.id}) }}>
+                                <i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Редактировать">&nbsp;&nbsp;</i>
+                            </a>
+                            <a href={{ path('sm_admin_emplrs_delete', {eID:emp.id}) }}>
+                                <i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="Удалить"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+    <p>Просмотр, управление списком сотрудников (личные карточки) с выходом
+    на регистрационные карточки пользователей, если сотрудник также является
+    и пользователей системы</p>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

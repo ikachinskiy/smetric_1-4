@@ -1,0 +1,47 @@
+{% extends "::base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+{% endblock %}
+
+{% block MainContent %}
+    <h1>Вход</h1>
+    <form method="post" action={{ path('sm_login') }}>
+        <div class="form-group">
+            <label for="empMainEMail">Ваш основной e-mail</label>
+            <input type="email" name="empMainEMail" class="form-control" id="empMainEMail" placeholder="Ведите ваш регистрационный e-mail">
+        </div>
+        <div class="form-group">
+            <label for="empPass">Пароль</label>
+            <input type="password" name="empPass" class="form-control" id="empPass" placeholder="Пароль">
+        </div>
+        <div class="form-group col-sm-12 text-right">
+            <button type="submit" name="btnSubmit" value="MakeLogin" class="btn btn-primary btn-sm" href={{ path('sm_login') }}>Войти</button>
+        </div>
+        {% if errMess != null %}
+            <div class="form-row alert alert-danger" role="alert">
+                <p class="lead">{{ errMess }}</p>
+            </div>
+        {% endif %}
+        <input type="hidden" name="frmName" value="UserLogin">
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

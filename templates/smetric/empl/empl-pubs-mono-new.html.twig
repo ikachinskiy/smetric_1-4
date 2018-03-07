@@ -1,0 +1,89 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Публикации учебников, пособий и монографий: регистрация новой</p>
+    <form method="post" action={{ path('sm_empl_pubs_mono_new') }}>
+        <div class="form-group form-row">
+            <label for="monoAuthors" class="col-sm-2 col-form-label">Авторы:</label>
+            <div class="col-sm-10">
+                <input name="monoAuthors" id="monoAuthors" type="text" class="form-control form-control-sm" placeholder="Автор (и соавторы) публикации">
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="monoAuthorsFRC" class="col-sm-6 col-form-label">Число авторов - сотрудников ФИЦ ИУ РАН:</label>
+            <div class="col-sm-6">
+                <input name="monoAuthorsFRC" id="monoAuthorsFRC" type="text" class="form-control form-control-sm" placeholder="в том числе сотрудников ФИЦ ИУ РАН"
+                       data-toggle="tooltip" data-placement="top" title="Введите число авторов, являющихся сотрудниками ФИЦ ИУ РАН">
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="monoTitle" class="col-sm-2 col-form-label">Название:</label>
+            <div class="col-sm-10">
+                <textarea name="monoTitle" id="monoTitle" class="form-control form-control-sm text-left"
+                          rows="4" placeholder="Полное название учебника, пособия или монографии на языке публикации"></textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="monoPlacePub" class="col-sm-1 col-form-label">Место:</label>
+            <div class="col-sm-3">
+                <input name="monoPlacePub" id="monoPlacePub" type="text" class="form-control form-control-sm" placeholder="Место издания">
+            </div>
+            <label for="monoPub" class="col-sm-2 col-form-label">Издательство:</label>
+            <div class="col-sm-6">
+                <input name="monoPub" id="monoPub" type="text" class="form-control form-control-sm" placeholder="Название издательства">
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="monoYear" class="col-sm-1 col-form-label text-right">Год:</label>
+            <div class="col-sm-2">
+                <input name="monoYear" id="monoYear" type="text" class="form-control form-control-sm" placeholder="издания">
+            </div>
+            <label for="monoPages" class="col-sm-1 col-form-label text-right">Стр:</label>
+            <div class="col-sm-1">
+                <input name="monoPages" id="monoPages" type="text" class="form-control form-control-sm" placeholder="всего">
+            </div>
+            <label for="monoISBN" class="col-sm-1 col-form-label text-right">ISBN:</label>
+            <div class="col-sm-4">
+                <input name="monoISBN" id="monoISBN" type="text" class="form-control form-control-sm" placeholder="код ISBN">
+            </div>
+            <label for="monoCirculation" class="col-sm-1 col-form-label text-right">Тираж:</label>
+            <div class="col-sm-1">
+                <input name="monoCirculation" id="monoCirculation" type="text" class="form-control form-control-sm" placeholder="экз.">
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="SaveNewMono" class="btn btn-primary btn-sm col-sm-9">Сохранить и вернуться</button>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="DontSaveNewMono" class="btn btn-primary btn-sm col-sm-9">Вернуться без сохранения</button>
+            </div>
+        </div>
+        <input type="hidden" name="formName" value="EmpMonoNew">
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <form>
+        <div class="form-row">
+            <div class="col-sm-4">
+                <p class="lead">Публикация докладов:</p>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-primary btn-sm" href={{ path('sm_empl_pubs_reports_new') }} role="button">Новый</a>
+            </div>
+            <div class="col-sm-4">
+                <p class="lead text-right">Отч.год:</p>
+            </div>
+            <div class="col-sm-2">
+                <select class="form-control form-control-sm" id="empRepYear">
+                    <option>2017</option>
+                    <option>2018</option>
+                </select>
+            </div>
+        </div>
+        <table class="table table-striped table-bordered table-hover table-sm">
+            <thead class="thead-inverse">
+            <tr>
+                <th>№</th>
+                <th>Опубликованные доклады</th>
+                <th class="text-right">Команды</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if pubs == null %}
+                <tr>
+                    <td>
+
+                    </td>
+                    <td>
+                        <p>Опубликованных докладов и/или тезисов докладов не зарегистрировано</p>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            {% else %}
+                {% set i = 0 %}
+                {% for report in pubs %}
+                    {% set i = i+1 %}
+                    <tr>
+                        <td width="5%">
+                            {{ i }}
+                        </td>
+                        <td width="80%">
+                            {{ report.allauthors|e }}<br>
+                            {% if report.reptype == 1 %}
+                                доклад
+                            {% endif %}
+                            {% if report.reptype == 0 %}
+                                тезисы доклада
+                            {% endif %}
+                            "{{ report.title|e }}"<br>
+                            <strong>Мероприятие: </strong>{{ report.eventname|e }}<br>
+                            <strong>Место проведения: </strong>{{ report.eventplace|e }}, <strong>Год: </strong>{{ report.eventstartdate|date("Y") }}<br>
+                        </td>
+                        <td class="text-right" width="15%">
+                            <a href={{ path('sm_empl_pubs_reports_view', {repID:report.id}) }}>
+                                <i class="fa fa-search" data-toggle="tooltip" data-placement="top" title="Просмотр"></i>
+                            </a>&nbsp;&nbsp;
+                            <a href={{ path('sm_empl_pubs_reports_edit', {repID:report.id}) }}>
+                                <i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Редактировать"></i>
+                            </a>&nbsp;&nbsp;
+                            <a href={{ path('sm_empl_pubs_reports_delete', {repID:report.id}) }}>
+                                <i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="Удалить"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

@@ -14,10 +14,74 @@
     <title>{% block title %}Symfony:T4{% endblock %}</title>
 </head>
 <body>
-<div class="container">
-    {% block body %}{% endblock %}
-</div>
 
+<div class="mpage container d-flex flex-column">
+    <header class="nav navbar navbar-toggleable no-gutters">
+        <div class="top-nav row col-12 no-gutters">
+            <div class="logo col-2"><h2><a href={{ path('sm_homepage') }}>SMetric</a></h2></div>
+            <div class="col-7">
+                {% block TopMenu %}
+                    {{ knp_menu_render('AppBundle:Builder:topMenu') }}
+                {% endblock %}
+            </div>
+            <div class="regmenu col-2 text-right">
+                {% block RegMenu %}
+                    {% if UserState == 'a' %}
+                        {% set MenuItem=knp_menu_get('AppBundle:Builder:regMenuA', [], {'L':'Сюда'}) %}
+                        {{ knp_menu_render(MenuItem) }}
+                    {% else %}
+                        {{ knp_menu_render('AppBundle:Builder:regMenuR') }}
+                    {% endif %}
+                {% endblock %}
+            </div>
+            <div class="avatar col-1 text-right">
+                {% block Avatar %}
+                    {%  if UserState == 'a' %}
+                        <a href={{ path('sm_profile') }}><img src="{{ asset('images/avatar-a.png') }}" width="60px" height="60px"></a>
+                    {% else %}
+                        <a href={{ path('sm_profile') }}><img src="{{ asset('images/avatar-r.png') }}" width="60px" height="60px"></a>
+                    {% endif %}
+                {% endblock %}
+            </div>
+        </div>
+    </header>
+    <div class="mcontent d-flex flex-row">
+        <div class="row col-12 no-gutters">
+            <div class="lmenu col-2">
+                {% block LeftMenu %}
+                {% endblock %}
+            </div>
+            <div class="rcontent col-10">
+                {% block MainContent %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+    <footer class="nav navbar">
+        <div class="row col-sm-12">
+            <div class="col-sm-9">
+                {% block Footer %}
+                {% if UserState == 'a' %}
+                <p class="text-left">Аноним: {{ UserState }}, {{ UserRole }}, {{ UserID }}<br>
+                    {% if roleEmpl == 1 %}Сотрудник&nbsp{% endif %}
+                    {% if roleManager == 1 %}Руководитель&nbsp{% endif %}
+                    {% if roleAnalit == 1 %}Аналитик&nbsp{% endif %}
+                    {% if roleAdmin == 1 %}Сис.админ&nbsp{% endif %}
+                    {% else %}
+                <p class="text-left">Юзер: {{ UserState }}, {{ UserRole }}, {{ UserID }}<br>
+                    {% if roleEmpl == 1 %}Сотрудник&nbsp{% endif %}
+                    {% if roleManager == 1 %}Руководитель&nbsp{% endif %}
+                    {% if roleAnalit == 1 %}Аналитик&nbsp{% endif %}
+                    {% if roleAdmin == 1 %}Сис.админ&nbsp{% endif %}
+                    {% endif %}
+                    {% endblock %}
+            </div>
+            <div class="col-sm-3">
+                <p class="lead text-right">{{ "now"|date('d M Y', timezone="Europe/Moscow") }}</p>
+            </div>
+        </div>
+    </footer>
+</div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src={{ asset('js/jquery-3.3.1.min.js') }}></script>

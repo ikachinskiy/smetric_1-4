@@ -1,0 +1,139 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Просмотр доклада</p>
+    <form method="post" action="{{ path('sm_empl_pubs_reports') }}">
+        <div class="form-group form-row">
+            <label for="reportAuthors" class="col-sm-2 form-control-label">Авторы:</label>
+            <div class="col-sm-10">
+                <textarea type="text" readonly id="reportAuthors" class="form-control form-control-sm" rows="1">{{ rep.allauthors }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="reportAuthFRC" class="col-sm-6 form-control-label">Число авторов - сотрудников ФИЦ ИУ РАН:</label>
+            <div class="col-sm-6">
+                <input readonly id="reportAuthFRC" type="text" class="form-control form-control-sm" value={{ rep.numauthfrc }}
+                       data-toggle="tooltip" data-placement="top" title="Введите число авторов, являющихся сотрудниками ФИЦ ИУ РАН">
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="reportTitle" class="col-sm-2 form-control-label">Название:</label>
+            <div class="col-sm-8 form-control-sm">
+                <textarea readonly id="reportTitle" class="form-control form-control-sm text-left" rows="2">{{ rep.title }}
+                </textarea>
+            </div>
+            <div class="col-sm-2 text-right">
+                {% if rep.reptype == true %}
+                    <strong>Доклад</strong>
+                {% else %}
+                    <strong>Тезисы<br>доклада</strong>
+                {% endif %}
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="reportEvent" class="col-sm-2 form-control-label">Мероприятие:</label>
+            <div class="col-sm-10 form-control-sm">
+                <textarea readonly id="reportEvent" type="text" class="form-control form-control-sm"
+                rows="2">{{ rep.eventname }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <div class="col-sm-7">
+                <strong>Место проведения: </strong>{{ rep.eventplace }}
+            </div>
+            <div class="col-sm-5 text-right">
+                <strong> Время: </strong>с {{ rep.eventstartdate|date("d/m/Y") }} по {{ rep.eventenddate|date("d/m/Y") }}
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="reportMagTitle" class="col-sm-2 form-control-label">Сборник:</label>
+            <div class="col-sm-10 form-control-sm">
+                <textarea readonly id="reportMagTitle" class="form-control form-control-sm" rows="1">{{ rep.magazine }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="reportPub" class="col-sm-2 form-control-label">Издательство:</label>
+            <div class="col-sm-10 form-control-sm">
+                <textarea type="text" id="reportPub" class="form-control form-control-sm"
+                          readonly rows="1">{{ rep.publisher }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <div class="col-sm-4 text-left">
+                <strong>Место изд.:</strong> {{ rep.pubplace }}
+            </div>
+            <div class="col-sm-4 text-center">
+                <strong>Год: </strong>{{ rep.pubyear }}
+            </div>
+            <div class="col-sm-4 text-right">
+                <strong>Страницы с </strong>{{ rep.startpage }}<strong> по </strong>{{ rep.endpage }}
+            </div>
+        </div>
+        {% if rep.catwos == true %}
+            {% set wos = "WoS  " %}
+        {% else %}
+            {% set wos = "" %}
+        {% endif %}
+        {% if rep.catscopus == true %}
+            {% set scopus = "Scopus  " %}
+        {% else %}
+            {% set scopus = "" %}
+        {% endif %}
+        {% if rep.catissn == true %}
+            {% set issn = "ISSN  " %}
+        {% else %}
+            {% set issn = "" %}
+        {% endif %}
+        {% if rep.catisbn == true %}
+            {% set isbn = "ISBN  " %}
+        {% else %}
+            {% set isbn = "" %}
+        {% endif %}
+        {% if rep.catothers == true %}
+            {% set others = "Иное  " %}
+        {% else %}
+            {% set others = "" %}
+        {% endif %}
+
+        <div class="form-group form-row">
+            <label for="reportParameters" class="col-sm-2">Категории:</label>
+            <div class="col-sm-10">
+                <textarea id="reportParameters" type="text" readonly class="form-control form-control-sm"
+                          rows="1">{{ [wos, scopus, issn, isbn, others]|join }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <div class="col-sm-6 text-right">
+                <button class="btn btn-primary btn-sm col-sm-9" type="submit">Вернуться</button>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button class="btn btn-primary btn-sm col-sm-9" type="submit">Печать в PDF</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

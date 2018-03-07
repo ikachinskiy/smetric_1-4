@@ -1,0 +1,102 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Редактирование объекта интеллектуальной собственности</p>
+    <form method="post" action={{ path('sm_empl_patents_edit', {oipID:oip.id}) }}>
+        <div class="form-group form-row">
+            <label for="patAuthors" class="col-sm-2 col-form-label">Автор(ы):</label>
+            <div class="col-sm-10">
+                <textarea type="text" name="patAuthors" id="patAuthors" class="form-control form-control-sm"
+                          rows="1">{{ oip.allauthors }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="patAuthorsFRC" class="col-sm-6 col-form-label">Число авторов - сотрудников ФИЦ ИУ РАН:</label>
+            <div class="col-sm-6">
+                <input type="text" name="patAuthorsFRC" id="patAuthorsFRC" class="form-control form-control-sm"
+                       data-toggle="tooltip" data-placement="top" title="Введите число авторов, являющихся сотрудниками ФИЦ ИУ РАН"
+                       value={{ oip.numbauthfrc }}
+                >
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="patTitle" class="col-sm-2 col-form-label">Название:</label>
+            <div class="col-sm-10">
+                <textarea name="patTitle" id="patTitle" class="form-control form-control-sm text-left"
+                          rows="4">{{ oip.title }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="patType"class="col-sm-2 col-form-label">Вид ОИС:</label>
+            <div class="col-sm-5">
+                <select name="patType" id="patType" class="form-control form-control-sm" size="4">
+                    {% for pt in ptypes %}
+                        <option value={{ pt.id }}
+                        {% if oip.type == pt.id %}
+                             selected
+                        {% endif %}
+                        >{{ pt.description }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <label for="patNumber" class="col-sm-2 col-form-label text-right">№ рег.:</label>
+            <div class="col-sm-3">
+                <input name="patNumber" id="patNumber" type="text" class="form-control form-control-sm" value={{ oip.regnum }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="patPriorDate" class="col-sm-3 col-form-label text-right">Дата приоритета:</label>
+            <div class="col-sm-3">
+                <input name="patPriorDate" id="patPriorDate" type="date" class="form-control form-control-sm"
+                       value={{ oip.priordate }}>
+            </div>
+            <label for="patRegDate" class="col-sm-2 col-form-label text-right">Дата рег.:</label>
+            <div class="col-sm-4">
+                <input name="patRegDate" id="patRegDate" type="date" class="form-control form-control-sm"
+                       value={{ oip.regdate }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="patNumPub" class="col-sm-3 col-form-label text-right">№ бюллетеня</label>
+            <div class="col-sm-3">
+                <input name="patNumPub" id="patNumPub" type="text" class="form-control form-control-sm"
+                       value={{ oip.pubnum }}>
+            </div>
+        </div>
+
+        <div class="form-group form-row">
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="SaveEditPatent" class="btn btn-primary btn-sm col-sm-9">Сохранить и вернуться</button>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="DontSaveEditPatent" class="btn btn-primary btn-sm col-sm-9">Вернуться без сохранения</button>
+            </div>
+        </div>
+        <input type="hidden" name="formName" value="EmpPatentEdit">
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

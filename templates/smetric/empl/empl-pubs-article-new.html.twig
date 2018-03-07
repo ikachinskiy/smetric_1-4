@@ -1,0 +1,135 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Регистрация новой статьи</p>
+    <form method="post" action={{ path('sm_empl_pubs_article_new') }}>
+        <div class="form-group form-row">
+            <label for="articleAuthors" class="col-sm-2 col-form-label">Автор(ы):</label>
+            <div class="col-sm-10">
+                <input name="articleAuthors" id="articleAuthors" type="text" class="form-control form-control-sm" placeholder="Авторы статьи"
+                       data-toggle="tooltip" data-placement="top" title="Формат: Фамилия (полностью), инициалы, ...">
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="articleNumbAuth" class="col-sm-6 col-form-label">Число авторов - сотрудников ФИЦ ИУ РАН:</label>
+            <div class="col-sm-6">
+                <input name="articleNumbAuth" id="articleNumbAuth" type="text" class="form-control form-control-sm" placeholder="в том числе сотрудников ФИЦ ИУ РАН"
+                       data-toggle="tooltip" data-placement="top" title="Введите число авторов, являющихся сотрудниками ФИЦ ИУ РАН">
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="articleTitle" class="col-sm-2 col-form-label">Название:</label>
+            <div class="col-sm-10">
+                <textarea name="articleTitle" id="articleTitle" class="form-control form-control-sm"
+                          rows="4" placeholder="Полное название статьи на языке публикации"></textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="articleMagTitle" class="col-sm-2 col-form-label">Журнал:</label>
+            <div class="col-sm-10">
+                <input name="articleMagTitle" id="articleMagTitle" type="text" class="form-control form-control-sm" placeholder="Полное название журнала">
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <div class="form-group col-sm-4">
+                <label for="articleYear">Год:</label>
+                <input name="articleYear" id="articleYear" type="text" class="form-control form-control-sm">
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="articleVolume">Том:</label>
+                <input name="articleVolume" id="articleVolume" type="text" class="form-control form-control-sm" placeholder="Том">
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="articleMagNumber">Номер:</label>
+                <input name="articleMagNumber" id="articleMagNumber" type="text" class="form-control form-control-sm" placeholder="Номер">
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="articlePageStart">Стр. начало:</label>
+                <input name="articlePageStart" id="articlePageStart" type="text" class="form-control form-control-sm" placeholder="Начало">
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="articlePageEnd">Стр. конец:</label>
+                <input name="articlePageEnd" id="articlePageEnd" type="text" class="form-control form-control-sm" placeholder="Конец">
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label class="col-sm-3">Категории:</label>
+            <div class="col-sm-3">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input name="WoS-Core" id="WoS-Core" type="checkbox" class="form-check-input">
+                        WoS(Core)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input name="WoS-RSCI" id="WoS-RSCI" type="checkbox" class="form-check-input">
+                        WoS(RSCI)
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input name="Scopus" id="Scopus" type="checkbox" class="form-check-input">
+                        Scopus
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input name="VAK" id="VAK" type="checkbox" class="form-check-input">
+                        Перечень ВАК
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input name="RINC" id="RINC" type="checkbox" class="form-check-input">
+                        Перечень РИНЦ
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input name="Others" id="Others" type="checkbox" class="form-check-input">
+                        Иное
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="SaveNewArt" class="btn btn-primary btn-sm col-sm-9">Сохранить и вернуться</button>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="DontSaveNewArt" class="btn btn-primary btn-sm col-sm-9">Вернуться без сохранения</button>
+            </div>
+        </div>
+        <input type="hidden" name="formName" value="EmpArtNew">
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

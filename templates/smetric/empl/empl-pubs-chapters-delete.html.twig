@@ -1,0 +1,91 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Удаление глав в учебниках, пособиях и монографиях</p>
+    <form method="post" action={{ path('sm_empl_pubs_chapters_delete', {chapterID:chapter.id}) }}>
+        <div class="form-group form-row">
+            <label for="chaptersAuthor" class="col-sm-2 col-form-label">Автор(ы):</label>
+            <div class="col-sm-10">
+                <textarea type="text" readonly id="chaptersAuthor" class="form-control form-control-sm"
+                          rows="1">{{ chapter.allauthors }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="chaptersChTitle" class="col-sm-2 col-form-label">Название главы:</label>
+            <div class="col-sm-10">
+                <textarea id="chaptersChTitle" readonly class="form-control form-control-sm text-left"
+                          rows="3">{{ chapter.titlechapter }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="chaptersPubTitle" class="col-sm-2 col-form-label">Название учебника / пособия / монографии:</label>
+            <div class="col-sm-10">
+                <textarea id="chaptersPubTitle" readonly class="form-control form-control-sm text-left"
+                          rows="4">{{ chapter.titlemono }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="chaptersEditor" class="col-sm-3 col-form-label">Под редакцией:</label>
+            <div class="col-sm-9">
+                <textarea id="chaptersEditor" type="text" readonly class="form-control form-control-sm"
+                          rows="2">{{ chapter.editor }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="chaptersPubPlace" class="col-sm-1 col-form-label">Место:</label>
+            <div class="col-sm-3">
+                <textarea id="chaptersPubPlace" type="text" readonly class="form-control form-control-sm"
+                          rows="1">{{ chapter.pubplace }}</textarea>
+            </div>
+            <label for="chaptersPub" class="col-sm-2 col-form-label">Издательство:</label>
+            <div class="col-sm-6">
+                <textarea id="chaptersPub" type="text" readonly class="form-control form-control-sm"
+                          rows="1">{{ chapter.publisher }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="chaptersYear" class="col-sm-1 col-form-label">Год:</label>
+            <div class="col-sm-2">
+                <input id="chaptersYear" type="text" readonly class="form-control form-control-sm" value={{ chapter.pubyear }}>
+            </div>
+            <label for="chaptersPages" class="col-sm-1 col-form-label text-right">Стр:</label>
+            <div class="col-sm-2">
+                <input id="chaptersPages" type="text" readonly class="form-control form-control-sm" value={{ chapter.pages }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="DontDeleteChapter" class="btn btn-primary btn-sm col-sm-9">Вернуться без удаления</button>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="DeleteChapter" class="btn btn-primary btn-sm col-sm-9">Удалить и вернуться</button>
+            </div>
+        </div>
+        <input type="hidden" name="formName" value="EmpDeleteChapter">
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

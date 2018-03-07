@@ -1,0 +1,94 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <form>
+        <div class="form-row">
+            <div class="col-sm-6">
+                <p class="lead">Публикация учебников, учебных пособий и научных монографий:</p>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-primary btn-sm" href={{ path('sm_empl_pubs_mono_new') }}>Новая</a>
+            </div>
+            <div class="col-sm-2">
+                <label for="empRepYear" class="lead text-right">Отч.год:</label>
+            </div>
+            <div class="col-sm-2">
+                <select class="form-control form-control-sm" id="empRepYear">
+                    <option>2017</option>
+                    <option>2018</option>
+                </select>
+            </div>
+        </div>
+        <table class="table table-striped table-bordered table-hover table-sm">
+            <thead class="thead-inverse">
+            <tr>
+                <th>№</th>
+                <th>Опубликованные учебники, учебные пособия и монографии</th>
+                <th class="text-right">Команды</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if pubs == null %}
+                <tr>
+                    <td width="5%"></td>
+                    <td width="80%">
+                        <p>Опубликованных учебников, учебных пособий и монографий не зарегистрировано</p>
+                    </td>
+                    <td width="15%"></td>
+                </tr>
+            {% else %}
+                {% set i = 0 %}
+                {% for mono in pubs %}
+                    {% set i = i+1 %}
+                    <tr>
+                        <td width="5%">
+                            {{ i }}
+                        </td>
+                        <td width="80%">
+                            {{ mono.allauthors|e }}<br>
+                            "{{ mono.title|e }}"<br>
+                            <strong>Издательство: </strong>{{ mono.publisher }}, {{ mono.pubyear }} г., в г.{{ mono.pubplace }}<br>
+                        </td>
+                        <td class="text-right" width="15%">
+                            <a href={{ path('sm_empl_pubs_mono_view', {monoID:mono.id}) }}>
+                                <i class="fa fa-search" data-toggle="tooltip" data-placement="top" title="Просмотр"></i>
+                            </a>&nbsp;&nbsp;
+                            <a href={{ path('sm_empl_pubs_mono_edit', {monoID:mono.id}) }}>
+                                <i class="fa fa-pencil" data-toggle="tooltip" data-placement="top" title="Редактировать"></i>
+                            </a>&nbsp;&nbsp;
+                            <a href={{ path('sm_empl_pubs_mono_delete', {monoID:mono.id}) }}>
+                                <i class="fa fa-trash" data-toggle="tooltip" data-placement="top" title="Удалить"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

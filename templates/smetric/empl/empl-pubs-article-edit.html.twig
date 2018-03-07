@@ -1,0 +1,172 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Публикации статей: редактирование</p>
+    <form method="post" action={{ path('sm_empl_pubs_article_edit', {artID:art.id}) }}>
+        <div class="form-group form-row">
+            <label for="articleAuthors" class="col-sm-2 col-form-label">Автор(ы):</label>
+            <div class="col-sm-10">
+                <textarea id="articleAuthors" name="articleAuthors" class="form-control form-control-sm" rows="1" placeholder="Авторы статьи"
+                          data-toggle="tooltip" data-placement="top" title="Формат: Фамилия (полностью), инициалы, ...">{{ art.allauthors }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="articleNumbAuth" class="col-sm-6 col-form-label">Число авторов - сотрудников ФИЦ ИУ РАН:</label>
+            <div class="col-sm-6">
+                <input id="articleNumbAuth" name="articleNumbAuth" type="text" class="form-control form-control-sm" placeholder="в том числе сотрудников ФИЦ ИУ РАН"
+                       data-toggle="tooltip" data-placement="top" title="Введите число авторов, являющихся сотрудниками ФИЦ ИУ РАН"
+                value={{ art.numauthfrc }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="articleTitle" class="col-sm-2 col-form-label">Название:</label>
+            <div class="col-sm-10">
+                <textarea id="articleTitle" name="articleTitle" class="form-control form-control-sm"
+                     rows="4">{{ art.title }}
+                </textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label for="articleMagTitle" class="col-sm-2 col-form-label">Журнал:</label>
+            <div class="col-sm-10">
+                <textarea id="articleMagTitle" name="articleMagTitle" type="text" class="form-control form-control-sm"
+                          placeholder="Полное название журнала" rows="1">{{ art.magazine }}</textarea>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <div class="form-group col-sm-4">
+                <label for="articleYear">Год:</label>
+                <input id="articleYear" name="articleYear" type="text" class="form-control form-control-sm"
+                value={{ art.year }}>
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="articleVolume">Том:</label>
+                <input id="articleVolume" name="articleVolume" type="text" class="form-control form-control-sm" value={{ art.volume }}>
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="articleMagNumber">Номер:</label>
+                <input id="articleMagNumber" name="articleMagNumber" type="text" class="form-control form-control-sm" value={{ art.number }}>
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="articlePageStart">Стр. начало:</label>
+                <input id="articlePageStart" name="articlePageStart" type="text" class="form-control form-control-sm" value={{ art.startpage }}>
+            </div>
+            <div class="form-group col-sm-2">
+                <label for="articlePageEnd">Стр. конец:</label>
+                <input id="articlePageEnd" name="articlePageEnd" type="text" class="form-control form-control-sm" value={{ art.endpage }}>
+            </div>
+        </div>
+        <div class="form-group form-row">
+            <label class="col-sm-3">Категории:</label>
+            <div class="col-sm-3">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input id="WoS-Core" name="WoS-Core" type="checkbox" class="form-check-input"
+                        {% if art.catwoscore %}
+                            checked
+                        {% endif %}>
+                        WoS(Core)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input id="WoS-RSCI" name="WoS-RSCI" type="checkbox" class="form-check-input"
+                        {% if art.catwosrsci %}
+                            checked
+                        {% endif %}>
+                        WoS(RSCI)
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input id="Scopus" name="Scopus" type="checkbox" class="form-check-input"
+                        {% if art.catscopus %}
+                            checked
+                        {% endif %}>
+                        Scopus
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input id="VAK" name="VAK" type="checkbox" class="form-check-input"
+                        {% if art.catvak %}
+                            checked
+                        {% endif %}>
+                        Перечень ВАК
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input id="RINC" name="RINC" type="checkbox" class="form-check-input"
+                        {% if art.catrinc %}
+                            checked
+                        {% endif %}>
+                        Перечень РИНЦ
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input id="Others" name="Others" type="checkbox" class="form-check-input"
+                        {% if art.catothers %}
+                            checked
+                        {% endif %}>
+                        Иное
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group form-row">
+            <label class="col-sm-4 col-form-label text-right">Источник финансирования:</label>
+            <div class="col-sm-4">
+                <select class="form-control form-control-sm" name="finType">
+                    {% for ftype in fintype %}
+                        <option value="{{ ftype.id }}"
+                        {% if ftype.id == art.fintype %}
+                            selected
+                        {% endif %}>{{ ftype.finsource }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group form-row">
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="SaveEditArt" class="btn btn-primary btn-sm col-sm-9">Сохранить и вернуться</button>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button type="submit" name="btnSubmit" value="DontSaveEditArt" class="btn btn-primary btn-sm col-sm-9">Вернуться без сохранения</button>
+            </div>
+        </div>
+        <input type="hidden" name="formName" value="EmpArtEdit">
+    </form>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

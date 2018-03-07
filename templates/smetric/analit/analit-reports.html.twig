@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:analitMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Аналитик:</span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Отчёты</p>
+    <p>Генерация, просмотр, сохранение и печать отчётов
+        по рейтингам сотрудников ФИЦ ИУ РАН, организационной структуре и
+        и другим вопросам, представляющим интерес для руководства ФИЦ ИУ РАН
+    </p>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

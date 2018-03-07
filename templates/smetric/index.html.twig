@@ -1,0 +1,49 @@
+{% extends "::base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+{% endblock %}
+
+{% block MainContent %}
+    <div class="col-sm-12">
+        <h1 class="text-center">Учёт результатов</h1>
+        <h1 class="text-center">научной деятельности</h1>
+        <h1 class="text-center">сотрудников ФИЦ ИУ РАН</h1>
+        <h1 class="text-center">и расчёт</h1>
+        <h1 class="text-center">индивидуальных рейтингов</h1>
+        {% if UserID == 0 %}
+            <p class="lead text-center">Доступ только зарегистрированным пользователям.</p>
+            <p class="lead text-center">Если вы зарегистрированы:</p>
+            <div class="text-center">
+                <p><a class="btn btn-primary" href={{ path('sm_login') }}>Войдите...</a></p>
+            </div>
+            <p class="lead text-center">Если нет:</p>
+            <div class="text-center">
+                <p><a class="btn btn-primary" href={{ path('sm_reg') }}>Зарегистрируйтесь...</a></p>
+            </div>
+        {% else %}
+            <p class="lead text-center">Текущий пользователь:</p>
+            <h2 class="text-center"><strong>{{ user.empfamily }}</strong></h2>
+            <h3 class="text-center"> {{ user.empname }}&nbsp;{{ user.empsoname }}</h3>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}

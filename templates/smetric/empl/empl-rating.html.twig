@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block TopMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block RegMenu %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Avatar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block LeftMenu %}
+    {{ knp_menu_render('AppBundle:Builder:emplMenu') }}
+{% endblock %}
+
+{% block MainContent %}
+    <h2><span class="badge badge-secondary">Сотрудник: </span>&nbsp;{{ user.empfamily }}&nbsp;{{ user.empname }}&nbsp;{{ user.empsoname }}</h2>
+    <p class="lead">Рейтинг</p>
+    <p class="lead text-center">По состоянию на {{ "now"|date('d M Y', timezone="Europe/Moscow") }}<br> ваш сводный рейтинг за текущий год составляет:</p>
+    <h1 class="display-1 text-center">{{ empR }}</h1>
+    <h3 class="text-center">баллов</h3>
+{% endblock %}
+
+{% block Footer %}
+    {{ parent() }}
+{% endblock %}
