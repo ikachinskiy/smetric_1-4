@@ -89,7 +89,7 @@
     "repositories": {
         "phpunit-bridge": {
             "type": "path",
-            "url": "/var/www/html/smetric/v_1-3/vendor/symfony/phpunit-bridge"
+            "url": "/var/www/html/smetric/smetric_1-4/vendor/symfony/phpunit-bridge"
         }
     }
 }
