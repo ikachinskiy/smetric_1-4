@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/dump/dump-v14.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_articles.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_chapters.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_discouncil.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_empl.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_emplgroups.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_fintype.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_groups.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_monos.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_patents.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_patentstype.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_reports.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_sciment.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_sciposition.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/dump/smetric_public_scistatus.sql" dialect="PostgreSQL" />
+    <file url="PROJECT" dialect="PostgreSQL" />
+  </component>
+</project>

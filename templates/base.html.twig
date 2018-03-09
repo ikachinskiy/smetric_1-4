@@ -22,18 +22,16 @@
             <div class="logo col-2"><h2><a href={{ path('sm_homepage') }}>SMetric</a></h2></div>
             <div class="col-7">
                 {% block TopMenu %}
-{#                    {{ knp_menu_render('AppBundle:Builder:topMenu') }} #}
+                    {{ knp_menu_render('SMetricMenuBundle:Builder:topMenu') }}
                 {% endblock %}
             </div>
             <div class="regmenu col-2 text-right">
                 {% block RegMenu %}
                     {% if UserState == 'a' %}
-{#
-                        {% set MenuItem=knp_menu_get('AppBundle:Builder:regMenuA', [], {'L':'Сюда'}) %}
+                        {% set MenuItem=knp_menu_get('SMetricMenuBundle:Builder:regMenuA', [], {'L':'Сюда'}) %}
                         {{ knp_menu_render(MenuItem) }}
-
-#}                    {% else %}
-                        {{ knp_menu_render('AppBundle:Builder:regMenuR') }}
+                    {% else %}
+                        {{ knp_menu_render('SMetricMenuBundle:Builder:regMenuR') }}
                     {% endif %}
                 {% endblock %}
             </div>

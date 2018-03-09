@@ -14,17 +14,17 @@ SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP DATABASE IF EXISTS smetric;
+DROP DATABASE IF EXISTS smetric14;
 --
 -- Name: smetric; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE smetric WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'ru_RU.UTF-8' LC_CTYPE = 'ru_RU.UTF-8';
+CREATE DATABASE smetric14 WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'ru_RU.UTF-8' LC_CTYPE = 'ru_RU.UTF-8';
 
 
-ALTER DATABASE smetric OWNER TO postgres;
+ALTER DATABASE smetric14 OWNER TO postgres;
 
-\connect smetric
+\connect smetric14
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
