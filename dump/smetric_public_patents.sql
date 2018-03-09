@@ -1,0 +1,3 @@
+INSERT INTO public.patents (id, author, allauthors, numbauthfrc, title, type, regnum, priordate, regdate, pubnum) VALUES ('a679d0cc-390b-4306-ad25-fe78c7c76c93', '6e18210d-474b-4885-9741-f337238e9d22', 'Сазонов и товарищи', 3, 'Программка мобильная
+                ', 4, '34563456', '2017-10-11', '2017-12-01', 123);
+INSERT INTO public.patents (id, author, allauthors, numbauthfrc, title, type, regnum, priordate, regdate, pubnum) VALUES ('36f0c8ef-6b7b-46e9-be78-9fc95242af08', '6e18210d-474b-4885-9741-f337238e9d22', 'Сазонов и коллектив', 1, 'Вечный двигатель думателя на лампочке-няонке', 2, '98765543', '2013-06-13', '2015-07-18', 666);

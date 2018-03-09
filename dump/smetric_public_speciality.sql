@@ -1,0 +1,13 @@
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (1, '05.13.11', 'Математическое и программное обеспечение вычислительных машин, комплексов и компьютерных сетей (физико-математические науки, технические науки)', 1);
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (2, '05.13.15', 'Вычислительные машины, комплексы и компьютерные сети (технические науки)', 1);
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (3, '05.13.19', 'Методы и системы защиты информации, информационная безопасность (технические науки)', 1);
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (4, '01.01.09', 'Дискретная математика и математическая кибернетика (физико-математические науки)', 2);
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (5, '05.13.17', 'Теоретические основы информатики (физико-математические науки, технические науки)', 2);
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (6, '01.01.07', 'Вычислительная математика (физико-математические науки)', 3);
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (7, '01.02.05', 'Механика жидкости, газа и плазмы (физико-математические науки)', 3);
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (8, '01.01.03', 'Математическая физика (физико-математические науки)', 3);
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (9, '05.13.01', 'Системный анализ, управление и обработка информации (информационно-вычислительное обеспечение) (физико-математические науки, технические науки)', 4);
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (10, '05.13.10', 'Управление в социальных и экономических системах (технические науки)', 4);
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (11, '05.13.18', 'Математическое моделирование, численные методы и комплексы программ (физико-математические науки, технические науки)', 4);
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (12, '08.00.05', 'Экономика и управление народным хозяйством (региональная экономика) (экономические науки)', 5);
+INSERT INTO public.speciality (id, number, descr, discouncil) VALUES (13, '08.00.13', 'Математические и инструментальные методы экономики (экономические науки)', 5);

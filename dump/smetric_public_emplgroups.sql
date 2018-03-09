@@ -1,0 +1,9 @@
+INSERT INTO public.emplgroups (empid, groupid) VALUES ('71676346-e4ed-4afa-b2d3-e400c648efdd', 1);
+INSERT INTO public.emplgroups (empid, groupid) VALUES ('71676346-e4ed-4afa-b2d3-e400c648efdd', 4);
+INSERT INTO public.emplgroups (empid, groupid) VALUES ('7b1833af-160c-4f1f-b58d-0a82a6d27efa', 1);
+INSERT INTO public.emplgroups (empid, groupid) VALUES ('75fc54c2-7bf6-40b1-9570-77ea64779faa', 1);
+INSERT INTO public.emplgroups (empid, groupid) VALUES ('d165acd2-af5b-479d-bf2b-e87c49f94156', 1);
+INSERT INTO public.emplgroups (empid, groupid) VALUES ('4a98209f-e2ac-4a02-b636-c4d87e5286a7', 1);
+INSERT INTO public.emplgroups (empid, groupid) VALUES ('610c7fd7-b8b3-4fe2-b7ac-1c8630524922', 1);
+INSERT INTO public.emplgroups (empid, groupid) VALUES ('1bb9c265-dc8f-4def-8f50-1bdbfa2c5717', 1);
+INSERT INTO public.emplgroups (empid, groupid) VALUES ('47a8dd08-544b-4085-9543-e4165685c0fb', 1);
