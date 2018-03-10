@@ -212,7 +212,7 @@ class MainController extends Controller
      * @Route("/reg", name="sm_reg")
      */
 
-    public function reg(Request $request) {
+    public function reg(Request $request, Connection $conn) {
 
         $_SESSION['tMenu'] = 'Start';
         $session = $request->getSession();
