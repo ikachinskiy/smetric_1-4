@@ -519,4 +519,123 @@ class EmplController extends Controller
     public function emplPubsMonoDelete() {
 
     }
+
+    /**
+     * @Route("/empl/pubs/chapters", name="sm_empl_pubs_chapters")
+     */
+    public function emplPubsChapters() {
+
+    }
+
+    /**
+     * @Route("/empl/pubs/chapters/new", name="sm_empl_pubs_chapters_new")
+     */
+    public function emplPubsChaptersNew() {
+
+    }
+
+    /**
+     * @Route("/empl/pubs/chapters/view/{chapterID}", name="sm_empl_pubs_chapters_view")
+     */
+    public function emplPubsChaptersView() {
+
+    }
+
+    /**
+     * @Route("/empl/pubs/chapters/edit/{chapterID}", name="sm_empl_pubs_chapters_edit")
+     */
+    public function emplPubsChaptersEdit() {
+
+    }
+
+    /**
+     * @Route("/empl/pubs/chapters/delete/{chapterID}", name="sm_empl_pubs_chapters_delete")
+     */
+    public function emplPubsChaptersDelete() {
+
+    }
+
+    /**
+     * @Route("/empl/patents", name="sm_empl_patents")
+     */
+    public function emplPatents() {
+
+    }
+
+    /**
+     * @Route("/empl/patents/new", name="sm_empl_patents_new")
+     */
+    public function emplPatentsNew() {
+
+    }
+
+    /**
+     * @Route("/empl/patents/view/{oipID}", name="sm_empl_patents_view")
+     */
+    public function emplPatentsView() {
+
+    }
+
+    /**
+     * @Route("/empl/patents/edit/{oipID}", name="sm_empl_patents_edit")
+     */
+    public function emplPatentsEdit() {
+
+    }
+
+    /**
+     * @Route("/empl/patents/delete/{oipID}", name="sm_empl_patents_delete")
+     */
+    public function emplPatentsDelete() {
+
+    }
+
+    /**
+     * @Route("/empl/sciment", name="sm_empl_sciment")
+     */
+    public function emplSciment() {
+
+    }
+
+    /**
+     * @Route("/empl/sciment/new", name="sm_empl_sciment_new")
+     */
+    public function emplScimentNew() {
+
+    }
+
+    /**
+     * @Route("/empl/sciment/view/{sciID}", name="sm_empl_sciment_view")
+     */
+    public function emplScimentView() {
+
+    }
+
+    /**
+     * @Route("/empl/sciment/edit/{sciID}", name="sm_empl_sciment_edit")
+     */
+    public function emplScimentEdit() {
+
+    }
+
+    /**
+     * @Route("/empl/sciment/delete/{sciID}", name="sm_empl_sciment_delete")
+     */
+    public function emplScimentDelete() {
+
+    }
+
+    /**
+     * @Route("/empl/reports", name="sm_empl_reports")
+     */
+    public function emplReports() {
+
+    }
+
+    /**
+     * @Route("/empl/rating", name="sm_empl_rating")
+     */
+    public function emplRating() {
+
+    }
 }

@@ -16,4 +16,38 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AnalitController extends Controller
 {
+    /**
+     * @Route("/analit", name="sm_analit")
+     */
+    public function analit() {
+
+    }
+
+    /**
+     * @Route("/analit/emplrs", name="sm_analit_emplrs")
+     */
+    public function analitEmplrs() {
+
+    }
+
+    /**
+     * @Route("/analit/orgstruct", name="sm_analit_orgstruct")
+     */
+    public function analitOrgStruct() {
+
+    }
+
+    /**
+     * @Route("/analit/reports", name="sm_analit_reports")
+     */
+    public function analitReports() {
+
+    }
+
+    /**
+     * @Route("/analit/parameters", name="sm_analit_parameters")
+     */
+    public function analitParameters() {
+
+    }
 }

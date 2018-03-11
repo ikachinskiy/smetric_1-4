@@ -42,4 +42,11 @@ class ManagerController extends Controller
             'roleAdmin'     =>  $session->get('roleAdmin')
         ]);
     }
+
+    /**
+     * @Route("/manager/emplrs", name="sm_manager_emplrs")
+     */
+    public function managerEmplrs() {
+
+    }
 }
