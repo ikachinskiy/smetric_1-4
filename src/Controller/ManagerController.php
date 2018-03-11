@@ -46,7 +46,26 @@ class ManagerController extends Controller
     /**
      * @Route("/manager/emplrs", name="sm_manager_emplrs")
      */
-    public function managerEmplrs() {
-
+    public function managerEmplrs(Request $request, Connection $conn) {
+        $session = $request->getSession();
+        $user = [];
+        if ($session->get('userID') == 0) {
+            $user['empfamily']  =   "Аноним";
+            $user['empname']    =   "";
+            $user['empsoname']  =   "";
+        } else {
+            $user = $conn->fetchAssoc('SELECT * FROM empl WHERE id = ?', [$session->get('userID')]);
+        }
+        return $this->render('smetric/manager/manager-emplrs.html.twig', [   // шаблон default/manager/manager-emplrs
+            'Title'         => 'SMetric: Руководитель: Сотрудники',
+            'user'      => $user,
+            'UserState'     =>  $session->get('userstate'),
+            'UserRole'      =>  $session->get('userrole'),
+            'UserID'        =>  $session->get('userID'),
+            'roleEmpl'      =>  $session->get('roleEmpl'),
+            'roleManager'   =>  $session->get('roleManager'),
+            'roleAnalit'    =>  $session->get('roleAnalit'),
+            'roleAdmin'     =>  $session->get('roleAdmin')
+        ]);
     }
 }
