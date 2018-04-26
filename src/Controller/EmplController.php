@@ -192,7 +192,7 @@ class EmplController extends Controller
             // Выбираем список статей, принадлежащих user
             $pubs = $conn->fetchAll('SELECT * FROM articles WHERE author = ?', [$session->get('userID')]);
             //      Возврат в форму отображения списка статей
-            return $this->render('@App/default/empl/empl-pubs-article.html.twig', [   // шаблон default/empl/empl-pubs-article
+            return $this->render('smetric/empl/empl-pubs-article.html.twig', [   // шаблон default/empl/empl-pubs-article
                 'Title'         => 'SMetric: Сотрудник:Публикации статей',
                 'user'      => $user,
                 'pubs'      => $pubs,
