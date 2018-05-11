@@ -7,9 +7,7 @@
  */
 declare(strict_types=1);
 
-
 namespace App\Controller;
-
 
 use Doctrine\DBAL\Driver\Connection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -23,6 +21,7 @@ class MainController extends Controller
      * @Route("/", name="sm_homepage")
      */
     public function index(Request $request, Connection $conn) {
+
         $session = $request->getSession();
         if (!$session->has('start')) {
             $session->set('start', true);
