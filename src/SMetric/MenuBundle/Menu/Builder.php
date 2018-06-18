@@ -328,17 +328,31 @@ class Builder implements ContainerAwareInterface
         $menu['Орг.структура']->setLinkAttribute('class', 'nav-link');
 
 
-        $menu->addChild('Отчёты', ['route' => 'sm_analit_reports',
+        $menu->addChild('Отчёты', [
+            'route' => 'sm_analit_reports',
             'routeParameters' =>
                 ['command' => 'first']]);
         $menu['Отчёты']->setAttribute('class', 'nav-item');
         $menu['Отчёты']->setLinkAttribute('class', 'nav-link');
+        $menu['Отчёты']->setChildrenAttributes([
+            'class' => 'nav flex-column'
+        ]);
+
+        $menu['Отчёты']->addChild('Сводный', [
+                'route' => 'sm_analit_reports',
+                'routeParameters'   => [
+                    'command' => 'second'
+                ]
+            ]
+        );
+        $menu['Отчёты']['Сводный']->setAttribute('class', 'nav-item');
+        $menu['Отчёты']['Сводный']->setLinkAttribute('class', 'nav-link');
 
         $menu['Отчёты']->addChild('Документы', [
             'route' => 'sm_analit_reports',
             'routeParameters'   => [
                 'command' => 'second'
-            ]
+                ]
             ]
         );
         $menu['Отчёты']['Документы']->setAttribute('class', 'nav-item');
