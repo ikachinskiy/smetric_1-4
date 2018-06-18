@@ -86,7 +86,7 @@
   </component>
   <component name="PhpInterpreters">
     <interpreters>
-      <interpreter home="$USER_HOME$/.PhpStorm2018.1/system/plugins/idea-php-latest-plugin/php-v7.2.6/php.sh" id="e39fd24b-9c5b-4653-bfc2-c15bc0dd1e31" name="PHP latest" debugger_id="php.debugger.XDebug" />
+      <interpreter home="$USER_HOME$/.PhpStorm2018.1/system/plugins/idea-php-latest-plugin/php-v7.2.5/php.sh" id="6bb9b8c4-19f3-4352-9178-62dff738fdb8" name="PHP latest" debugger_id="php.debugger.XDebug" />
     </interpreters>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
