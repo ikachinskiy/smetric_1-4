@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\SMetric\CurrentUser;
 use Doctrine\DBAL\Driver\Connection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,6 +22,10 @@ class MainController extends Controller
      * @Route("/", name="sm_homepage")
      */
     public function index(Request $request, Connection $conn) {
+
+        $cUser = CurrentUser::init();
+        $cUser->isReg();
+        $userState = $cUser->userState();
 
         $session = $request->getSession();
         if (!$session->has('start')) {
