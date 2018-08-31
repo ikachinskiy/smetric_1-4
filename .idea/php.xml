@@ -82,12 +82,20 @@
       <path value="$PROJECT_DIR$/vendor/tecnickcom/tcpdf" />
       <path value="$PROJECT_DIR$/vendor/tecnick.com/tcpdf" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/reflection" />
     </include_path>
   </component>
   <component name="PhpInterpreters">
     <interpreters>
-      <interpreter home="$USER_HOME$/.PhpStorm2018.1/system/plugins/idea-php-latest-plugin/php-v7.2.5/php.sh" id="6bb9b8c4-19f3-4352-9178-62dff738fdb8" name="PHP latest" debugger_id="php.debugger.XDebug" />
+      <interpreter home="$USER_HOME$/.PhpStorm2018.2/system/plugins/idea-php-latest-plugin/php-v7.2.9/php.sh" id="8448b24c-d481-46c0-a055-83757e9956b7" name="PHP latest" debugger_id="php.debugger.XDebug" />
     </interpreters>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
+  <component name="PhpUnit">
+    <phpunit_settings>
+      <PhpUnitSettings load_method="CUSTOM_LOADER" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" />
+    </phpunit_settings>
+  </component>
 </project>
